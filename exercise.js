@@ -36,65 +36,40 @@ function main() {
 }
 
 function processTransactions(transactions) {
-  if (transactions && transactions.length > 0) {
-    for (const transaction of transactions) {
-      if (transaction.type === 'PAYMENT') {
-        if (transaction.status === 'OPEN') {
-          if (transaction.method === 'CREDIT_CARD') {
-            processCreditCardPayment(transaction);
-          } else if (transaction.method === 'PAYPAL') {
-            processPayPalPayment(transaction);
-          } else if (transaction.method === 'PLAN') {
-            processPlanPayment(transaction);
-          }
-        } else {
-          console.log('Invalid transaction type!', transaction);
-        }
-      } else if (transaction.type === 'REFUND') {
-        if (transaction.status === 'OPEN') {
-          if (transaction.method === 'CREDIT_CARD') {
-            processCreditCardRefund(transaction);
-          } else if (transaction.method === 'PAYPAL') {
-            processPayPalRefund(transaction);
-          } else if (transaction.method === 'PLAN') {
-            processPlanRefund(transaction);
-          }
-        } else {
-          console.log('Invalid transaction type!', transaction);
-        }
-      } else {
-        console.log('Invalid transaction type!', transaction);
-      }
+    if (transactions.length !=0) {
+      processPayment(transactions)
     }
-  } else {
-    console.log('No transactions provided!');
+    else {
+        console.log('No transactions provided!');
+      }
+}
+
+function processPayment(transactions){
+  for (const transaction of transactions){
+      if (transaction.status ==='OPEN' ) {
+        payMent (transaction)
+      }
+      else(transaction.status ==='CLOSED');
+      cloSED(transaction)    
+    }
+}
+
+function payMent (transaction){
+    const methodWithoutUnderscores = transaction.method.replace(/_/g, ' ')
+    console.log(`Processing ${methodWithoutUnderscores.toLowerCase()} ${transaction.type.toLowerCase()} for amont :` + transaction.amount)
+    return}
+  
+function reFound(transaction){
+  if (transaction.type === 'REFOUND' && transaction.status ==='OPEN'){
+    console.log(`Processing plan for refound for amont :` + transaction.amount)
+    return
   }
 }
 
-function processCreditCardPayment(transaction) {
-  console.log(
-    'Processing credit card payment for amount: ' + transaction.amount
-  );
+function cloSED (transaction){
+  if (transaction.status ==='CLOSED'){
+    console.log('Invalid transaction type!', transaction)
+  }
 }
 
-function processCreditCardRefund(transaction) {
-  console.log(
-    'Processing credit card refund for amount: ' + transaction.amount
-  );
-}
 
-function processPayPalPayment(transaction) {
-  console.log('Processing PayPal payment for amount: ' + transaction.amount);
-}
-
-function processPayPalRefund(transaction) {
-  console.log('Processing PayPal refund for amount: ' + transaction.amount);
-}
-
-function processPlanPayment(transaction) {
-  console.log('Processing plan payment for amount: ' + transaction.amount);
-}
-
-function processPlanRefund(transaction) {
-  console.log('Processing plan refund for amount: ' + transaction.amount);
-}
