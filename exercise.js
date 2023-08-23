@@ -49,8 +49,9 @@ function processPayment(transactions){
       if (transaction.status ==='OPEN' ) {
         payMent (transaction)
       }
-      else(transaction.status ==='CLOSED');
-      cloSED(transaction)    
+      else if (transaction.status ==='CLOSED'){
+        console.log('Invalid transaction type!', transaction)
+      }   
     }
 }
 
@@ -63,12 +64,6 @@ function reFound(transaction){
   if (transaction.type === 'REFOUND' && transaction.status ==='OPEN'){
     console.log(`Processing plan for refound for amont :` + transaction.amount)
     return
-  }
-}
-
-function cloSED (transaction){
-  if (transaction.status ==='CLOSED'){
-    console.log('Invalid transaction type!', transaction)
   }
 }
 
